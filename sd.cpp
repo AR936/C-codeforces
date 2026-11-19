@@ -1,31 +1,34 @@
 #include <iostream>
 #include <vector>
+#include <map>
 using namespace std;
-int main()
+#define int long long
+signed main()
 {
     int t;
-    cin >> t;
-    for (int i=0; i<t;i++)
+    cin>>t;
+    while(t--)
     {
         int n;
-        cin >> n;
-        vector <int> v(n);
-        int s=0;
-        for (int j=0;j<n;j++)
+        cin>>n;
+        map<int,int>mp;
+        vector<int>v(n);
+        for (int i=0;i<n;i++)
         {
-            cin >> v[j];
+            int in;
+            cin>>in;
+            v[i]=in-i;
+            mp[v[i]]++;
         }
-        for (int j=0;j<n;j++)
+        int s=0;
+        for (const auto& [m,k]:mp)
         {
-            for (int k=1;j+k<n;k++)
+            if (k>1)
             {
-                if((v[j+k]-v[j])==k)
-                {
-                    s++;
-                }
+                s+=k*(k-1)/2;
             }
         }
-        cout << s << '\n';
+        cout<<s<<'\n';
     }
     return 0;
 }
